@@ -10,33 +10,52 @@
 
   
 </head>
-must probab numof prob getup last lunchstart end
 <body>
   <div class="container">  
   <form id="contact" action="" method="post">
-    <h3>Generate Your Course Schedule</h3>
-    <h4>Contact us for custom quote</h4>
+    <h1>Generate Your Course Schedule</h1>
     <fieldset id="1">
       <input placeholder="Courses you must take (eg. 15-122 15-112)" id="a" type="text" tabindex="1" required autofocus>
     </fieldset>
     <fieldset id="2">
-      <input placeholder="The number of courses you may take" id="b" type="text" tabindex="2" required>
+      <input placeholder="The number of optional courses" id="b" type="text" tabindex="2" required>
     </fieldset>
     <fieldset id="3">
-      <input placeholder="Course you may take" id="c" type="text" tabindex="3" required>
+      <input placeholder="Optional course you may take" id="c" type="text" tabindex="3" required>
     </fieldset>
-    <fieldset id="4">
-      <input placeholder="The time you get up" id="d" type="text" tabindex="4" required>
-    </fieldset>
-	<fieldset id="5">
-      <input placeholder="The time your class end" id="e" type="text" tabindex="5" required>
-    </fieldset>
-	<fieldset id="6">
-      <input placeholder="The time you have lunch" id="f" type="text" tabindex="6" required>
-    </fieldset>
-    <fieldset id="7">
-      <input placeholder="The time you finish having lunch" id="g" type="text" tabindex="7" required>
-    </fieldset>
+	<p> The time you get up in the morning </p>
+	<select id="d">
+				<option value = 6>6:00</option>
+		        <option value = 7>7:00</option>
+				<option value = 8>8:00</option>
+				<option value = 9>9:00</option>
+                <option value = 10>10:00</option>
+	</select>
+	<p> The time your class ends </p>
+	<select id="e">
+				<option value = 14>2:00</option>
+		        <option value = 15>3:00</option>
+				<option value = 16>4:00</option>
+				<option value = 17>5:00</option>
+                <option value = 18>6:00</option>
+	</select>
+    <p> The time you have lunch</p>
+	<select id="f">
+				<option value = 11>11:00</option>
+		        <option value = 12>12:00</option>
+				<option value = 13>1:00</option>
+				<option value = 14>2:00</option>
+                <option value = 15>3:00</option>
+	</select>
+	<p> The time you finish having lunch</p>
+	<select id="f">
+				<option value = 11>11:00</option>
+		        <option value = 12>12:00</option>
+				<option value = 13>1:00</option>
+				<option value = 14>2:00</option>
+                <option value = 15>3:00</option>
+	</select>
+
 
     <fieldset>
 			<button name="submit"  onclick="myFunction(); return false;">Submit</button>
