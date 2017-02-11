@@ -1,284 +1,113 @@
-<!doctype html>
-<html lang="en" class="no-js">
+<!DOCTYPE html>
+<html >
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Generate Your Course Schedule</title>
+  
+  
+  
+      <link rel="stylesheet" href="css/style2.css">
 
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
-	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
-	<script src="js/modernizr.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-	<script>
-		if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
-	</script>
-	<!-- Resource jQuery -->
-	<script type="text/javascript" src="js/main.js"></script>
-	<title>Schedule</title>
+  
 </head>
 <body>
-
-<button type="button" id = "add" onclick="add()">Add</button>
-<button type="button" id = "remove" onclick="rem()">Remove</button>
-<div class="cd-schedule loading">
-	<div class="timeline">
-		<ul id = "time">
-			<li><span>09:00</span></li>
-			<li><span>09:30</span></li>
-			<li><span>10:00</span></li>
-			<li><span>10:30</span></li>
-			<li><span>11:00</span></li>
-			<li><span>11:30</span></li>
-			<li><span>12:00</span></li>
-			<li><span>12:30</span></li>
-			<li><span>13:00</span></li>
-			<li><span>13:30</span></li>
-			<li><span>14:00</span></li>
-			<li><span>14:30</span></li>
-			<li><span>15:00</span></li>
-			<li><span>15:30</span></li>
-			<li><span>16:00</span></li>
-			<li><span>16:30</span></li>
-			<li><span>17:00</span></li>
-			<li><span>17:30</span></li>
-			<li><span>18:00</span></li>
-
-		</ul>
-	</div> <!-- .timeline -->
-
-	<div class="events">
-		<ul>
-			<li class="events-group">
-				<div class="top-info"><span>Monday</span></div>
-
-				<ul id = "Mon">
-<!-- 					<li class="single-event" name = "ass" data-start="9:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Abs Circuit</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="11:00" data-end="12:30" data-content="event-rowing-workout" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Rowing Workout</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="14:00" data-end="15:15"  data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Yoga Level 1</em>
-						</a>
-					</li> -->
-				</ul>
-			</li>
-
-			<li class="events-group">
-				<div class="top-info"><span>Tuesday</span></div>
-
-				<ul>
-					<li class="single-event" data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Rowing Workout</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="11:30" data-end="13:00"  data-content="event-restorative-yoga" data-event="event-4">
-						<a href="#0">
-							<em class="event-name">Restorative Yoga</em>
-						</a>
-					</li>
-
-					<li class="single-event" name = "ass" data-start="13:30" data-end="15:00" data-content="event-abs-circuit" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Abs Circuit</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="15:45" data-end="16:45"  data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Yoga Level 1</em>
-						</a>
-					</li>
-				</ul>
-			</li>
-
-			<li class="events-group">
-				<div class="top-info"><span>Wednesday</span></div>
-
-				<ul>
-					<li class="single-event" data-start="09:00" data-end="10:15" data-content="event-restorative-yoga" data-event="event-4">
-						<a href="#0">
-							<em class="event-name">Restorative Yoga</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="10:45" data-end="11:45" data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Yoga Level 1</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="12:00" data-end="13:25"  data-content="event-rowing-workout" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Rowing Workout</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="13:45" data-end="15:00" data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Yoga Level 1</em>
-						</a>
-					</li>
-				</ul>
-			</li>
-
-			<li class="events-group">
-				<div class="top-info"><span>Thursday</span></div>
-
-				<ul>
-					<li class="single-event" name = "ass" data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Abs Circuit</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="12:00" data-end="13:45" data-content="event-restorative-yoga" data-event="event-4">
-						<a href="#0">
-							<em class="event-name">Restorative Yoga</em>
-						</a>
-					</li>
-
-					<li class="single-event" name = "ass" data-start="15:30" data-end="16:30" data-content="event-abs-circuit" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Abs Circuit</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="17:00" data-end="18:30"  data-content="event-rowing-workout" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Rowing Workout</em>
-						</a>
-					</li>
-				</ul>
-			</li>
-
-			<li class="events-group">
-				<div class="top-info"><span>Friday</span></div>
-
-				<ul>
-					<li class="single-event" data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2">
-						<a href="#0">
-							<em class="event-name">Rowing Workout</em>
-						</a>
-					</li>
-
-					<li class="single-event" name = "ass" data-start="12:30" data-end="14:00" data-content="event-abs-circuit" data-event="event-1">
-						<a href="#0">
-							<em class="event-name">Abs Circuit</em>
-						</a>
-					</li>
-
-					<li class="single-event" data-start="15:45" data-end="16:45"  data-content="event-yoga-1" data-event="event-3">
-						<a href="#0">
-							<em class="event-name">Yoga Level 1</em>
-						</a>
-					</li>
-				</ul>
-			</li>
-		</ul>
-	</div>
-
-	<div class="event-modal">
-		<header class="header">
-			<div class="content">
-				<span class="event-date"></span>
-				<h3 class="event-name"></h3>
-			</div>
-
-			<div class="header-bg"></div>
-		</header>
-
-		<div class="body">
-			<div class="event-info"></div>
-			<div class="body-bg"></div>
-		</div>
-
-		<a href="#0" class="close">Close</a>
-	</div>
-
-	<div class="cover-layer"></div>
-</div> <!-- .cd-schedule -->
-</script>
-<script language="javascript">
-	function getScheduleTimestamp(time) {
-		//accepts hh:mm format - convert hh:mm to timestamp
-		time = time.replace(/ /g,'');
-		var timeArray = time.split(':');
-		var timeStamp = parseInt(timeArray[0])*60 + parseInt(timeArray[1]);
-		return timeStamp;
-	}
-	function add(){
-		var ul = document.getElementById("Mon");
-		var li = document.createElement("li");
-		var a = document.createElement("a");
-		a.setAttribute("href", "#0");
-		var em = document.createElement("em");
-		em.setAttribute("class","event-name");
-		var t = document.createTextNode("Test Couse");
-		em.appendChild(t);
-		var span = document.createElement("span");
-		span.setAttribute("class","event-date");
-		var time = document.createTextNode("12:30-15:30");
-		span.appendChild(time);
-		a.appendChild(span);
-		a.appendChild(em);
+  <div class="container">  
+  <form id="contact" action="" method="post">
+    <h1>Generate Your Course Schedule</h1>
+    <fieldset id="1">
+      <input placeholder="Courses you must take, seperated by space (eg. 15-122 15-112)" id="a" type="text" tabindex="1" required autofocus>
+    </fieldset>
+    <fieldset id="3">
+      <input placeholder="Optional course you may take, seperated by space" id="b" type="text" tabindex="3" required>
+    </fieldset>
+    <fieldset id="2">
+      <input placeholder="The number of optional courses you want in your schedule" id="c" type="text" tabindex="2" required>
+    </fieldset>
+	<p> The time you want your class to begin</p>
+	<select id="d">
+				<option value = 6>6:00</option>
+		        <option value = 7>7:00</option>
+				<option value = 8>8:00</option>
+				<option value = 9>9:00</option>
+                <option value = 10>10:00</option>
+	</select>
+	<p> The time you want your class to end </p>
+	<select id="e">
+				<option value = 14>2:00</option>
+		        <option value = 15>3:00</option>
+				<option value = 16>4:00</option>
+				<option value = 17>5:00</option>
+                <option value = 18>6:00</option>
+	</select>
+    <p> The time you have lunch</p>
+	<select id="f">
+				<option value = 11>11:00</option>
+		        <option value = 12>12:00</option>
+				<option value = 13>1:00</option>
+				<option value = 14>2:00</option>
+                <option value = 15>3:00</option>
+	</select>
+	<p> The time you finish having lunch</p>
+	<select id="g">
+				<option value = 11>11:00</option>
+		        <option value = 12>12:00</option>
+				<option value = 13>1:00</option>
+				<option value = 14>2:00</option>
+                <option value = 15>3:00</option>
+	</select>
 
 
-
-		// li.class = "single-event";
-		// li.data-start = "9:30";
-		// li.data-end = "10:30";
-		li.setAttribute("class", "single-event");
-		li.setAttribute("name", "ass");
-		li.setAttribute("data-start", "12:30");
-		li.setAttribute("data-end", "15:30");
-		li.setAttribute("data-content", "event-abs-circuit");
-		li.setAttribute("data-event", "event-1");
-
-		timeline = $(document).find('.timeline');
-		timelineItems = timeline.find('li');
-		timelineItemsNumber = timelineItems.length;
-		timelineStart = getScheduleTimestamp(timelineItems.eq(0).text());
-		//need to store delta (in our case half hour) timestamp
-		timelineUnitDuration = getScheduleTimestamp(timelineItems.eq(1).text()) - getScheduleTimestamp(timelineItems.eq(0).text());
-
-		eventsWrapper = $(document).find('.events');
-		eventsGroup = eventsWrapper.find('.events-group');
-		singleEvents = eventsGroup.find('.single-event');
-		eventSlotHeight = eventsGroup.eq(0).children('.top-info').outerHeight();
-
-		var start = getScheduleTimestamp($(li).attr('data-start')),
-			duration = getScheduleTimestamp($(li).attr('data-end')) - start;
-
-		var eventTop = eventSlotHeight*(start - timelineStart)/timelineUnitDuration,
-			eventHeight = eventSlotHeight*duration/timelineUnitDuration;
-		$(li).css({
-				top: (eventTop-1) +'px',
-				height: (eventHeight+1)+'px'
-			});
-		// li.setAttribute("style", "top: 49px; height: 101px;")
-		li.appendChild(a);
-		ul.appendChild(li);
-		test2();
-	}
-	function rem(){
-		var elements = document.getElementsByName('ass')
-		while (elements[0]) elements[0].parentNode.removeChild(elements[0])
-	}
-	test();
-</script>
-
-
-
+    <fieldset>
+	<button name="submit" onclick="myFunction(); return false;">Submit</button>
+<!--type="submit" id="contact-submit" data-submit="...Sending"-->
+    </fieldset>
+	<script>
+	function myFunction() {
+        var mustcourses = document.getElementById("a").value;
+        var string = mustcourses.split(" ");
+        var largeStringMust = "";
+        console.log(string);
+        for(var i =0; i < string.length; i++){
+            largeStringMust = largeStringMust + string[i];
+            if(i != string.length-1){
+                largeStringMust = largeStringMust + "+";
+            }
+        }
+        
+        var officialMust = "must=" + largeStringMust;
+        console.log(officialMust);
+        var largeStringOpt = "";
+        var optCourses = document.getElementById("b").value;
+        var optstring = optCourses.split(" ");
+        for(var i =0; i < optstring.length; i++){
+            largeStringOpt = largeStringOpt + optstring[i];
+            if(i != optstring.length-1){
+                largeStringOpt = largeStringOpt + "+";
+            }
+        }
+        var officialOpt = "option=" + largeStringOpt;
+        console.log(officialOpt);
+    	var numOptCourses = document.getElementById("c").value;
+        var officialNum = "num=" + numOptCourses;
+        console.log(officialNum);
+        var timeUp = document.getElementById("d").value;
+        var officialTimeup = "timeup=" + timeUp;
+        console.log(officialTimeup);
+        var timeEnd = document.getElementById("e").value;
+        var officialTimeend = "timeend=" + timeEnd;
+        var timeLunchStart = document.getElementById("f").value;
+        var officialLunchStart = "lunchstart=" + timeLunchStart;
+        var timeLunchEnds = document.getElementById("g").value;
+        var officialLunchEnd = "lunchend=" + timeLunchEnds;
+        var url = 'schedule.html' + '?' + officialMust + "&" + officialOpt + "&" + officialNum + "&" + officialTimeup + "&" + officialTimeend + "&" + officialLunchStart + "&" + officialLunchEnd;
+        console.log(url);
+        window.location.href = url;
+        return false;
+	}	
+	</script>
+  </form>
+</div>
+  
+  
 </body>
 </html>
