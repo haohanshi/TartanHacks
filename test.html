@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="text" name="txtJob" value="">
+<button type="button" id = "submit" onclick="Submit()">Submit</button>
+<div id = "submittext"></div>
+<div id = "test"></div>
+<p>Click the "Submit" button and the form-data will be sent to a page on the server called "demo_form.asp".</p>
+
+<!-- <h2>Using the XMLHttpRequest Object</h2>
+
+<div id="demo">
+<button type="button" onclick="loadXMLDoc()">Change Content</button>
+<button type="button" onclick="loadXMLDoc2()">Change Content2</button>
+</div> -->
+
+<script>
+document.getElementsByName("txtJob")[0]
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode == 13) {
+        document.getElementById("submit").click();
+    }
+});
+
+function Add(){
+    var ul = document.getElementById("Mon");
+    var li = document.createElement("li");
+    li.setAttribute("class", "single-event");
+    li.setAttribute("data-start", "9:30");
+    li.setAttribute("data-end", "10:30");
+    li.setAttribute("data-content", "event-abs-circuit");
+    li.setAttribute("data-event", "event-1");
+    Array.prototype.slice.call(li.attributes).forEach(function(item) {
+    console.log(item.name + ': '+ item.value);});
+    ul.appendChild(li);
+}
+function parse(str) {
+    var args = [].slice.call(arguments, 1),
+        i = 0;
+
+    return str.replace(/%s/g, function() {
+        return args[i++];
+    });
+}
+function loadXMLDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "http://128.237.142.192:8888/15-112", true);
+  xhttp.send();
+}
+function loadXMLDoc2() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "http://www.google.com", true);
+  xhttp.send();
+}
+function Submit() {
+    var jobValue = document.getElementsByName('txtJob')[0].value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        obj = JSON.parse(this.responseText);
+        document.getElementById("test").innerHTML = this.responseText;
+        if (obj.prereqs == null){
+          prer = "None";
+        } else {
+          prer = obj.prereqs;
+        }
+        if (obj.coreqs == null){
+          cor = "None";
+        } else {
+          cor = obj.coreqs;
+        }
+        document.getElementById("submittext").innerHTML =
+        "Name: " + obj.name + "<br />" + "Units: " + obj.units + "<br />" + "Pre-req: " + prer + "<br />" + "Co-req: " + cor + "<br />"+ "Description: "+ obj.desc + "<br />";
+      }
+    };
+  url = parse('http://128.237.201.122:8000/%s', jobValue);
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
+</script>
+
+</body>
+</html>
