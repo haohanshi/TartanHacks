@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef83db59-241d-43a6-a5b9-d665a04a55b2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/private_functions.py" afterPath="$PROJECT_DIR$/private_functions.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_functions.py" afterPath="$PROJECT_DIR$/public_functions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.py" afterPath="$PROJECT_DIR$/server.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.html" afterPath="$PROJECT_DIR$/test.html" />
     </list>
     <ignored path="TartanHacks.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -21,7 +18,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/TartanHacks$test.coverage" NAME="test Coverage Results" MODIFIED="1486783993764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TartanHacks$server.coverage" NAME="server Coverage Results" MODIFIED="1486836793658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/TartanHacks$public_functions.coverage" NAME="public_functions Coverage Results" MODIFIED="1486840013644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TartanHacks$public_functions.coverage" NAME="public_functions Coverage Results" MODIFIED="1486841935847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TartanHacks$private_functions.coverage" NAME="private_functions Coverage Results" MODIFIED="1486836791426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -39,8 +36,8 @@
       <file leaf-file-name="server.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.111111" vertical-offset="1796" max-vertical-offset="2850">
-              <caret line="116" column="23" selection-start-line="116" selection-start-column="23" selection-end-line="116" selection-end-column="23" />
+            <state vertical-scroll-proportion="-33.37037" vertical-offset="1683" max-vertical-offset="2850">
+              <caret line="136" column="27" selection-start-line="136" selection-start-column="27" selection-end-line="136" selection-end-column="27" />
               <folding>
                 <element signature="e#47#60#0" expanded="true" />
               </folding>
@@ -48,21 +45,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.703125" vertical-offset="1445" max-vertical-offset="2052">
-              <caret line="95" column="20" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="20" />
+            <state vertical-scroll-proportion="-7.9454546" vertical-offset="0" max-vertical-offset="2052">
+              <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="public_functions.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="public_functions.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.074074" vertical-offset="4096" max-vertical-offset="4636">
-              <caret line="237" column="43" selection-start-line="237" selection-start-column="42" selection-end-line="237" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.68333334" vertical-offset="3716" max-vertical-offset="4712">
+              <caret line="215" column="58" selection-start-line="215" selection-start-column="58" selection-end-line="215" selection-end-column="58" />
               <folding>
                 <element signature="e#24#35#0" expanded="true" />
               </folding>
@@ -73,7 +70,7 @@
       <file leaf-file-name="private_functions.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/private_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.259259" vertical-offset="105" max-vertical-offset="3952">
+            <state vertical-scroll-proportion="117.22222" vertical-offset="3412" max-vertical-offset="3952">
               <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
               <folding />
             </state>
@@ -89,10 +86,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/public_functions.py" />
         <option value="$PROJECT_DIR$/private_functions.py" />
         <option value="$PROJECT_DIR$/server.py" />
         <option value="$PROJECT_DIR$/test.html" />
+        <option value="$PROJECT_DIR$/public_functions.py" />
       </list>
     </option>
   </component>
@@ -504,7 +501,16 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="NONE" type="python-line">
+          <url>file://$PROJECT_DIR$/public_functions.py</url>
+          <line>213</line>
+          <log-expression expression="if lectureDict[&quot;lectureName&quot;] == &quot;Lec &quot; or lectureDict[&quot;lectureName&quot;] == &quot;Lec&quot;:&#10;            lectureDict[&quot;lectureName&quot;] = &quot;Lec 1&quot;" language="Python" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -558,26 +564,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/private_functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.259259" vertical-offset="105" max-vertical-offset="3952">
+        <state vertical-scroll-proportion="117.22222" vertical-offset="3412" max-vertical-offset="3952">
           <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public_functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.074074" vertical-offset="4096" max-vertical-offset="4636">
-          <caret line="237" column="43" selection-start-line="237" selection-start-column="42" selection-end-line="237" selection-end-column="43" />
-          <folding>
-            <element signature="e#24#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.111111" vertical-offset="1796" max-vertical-offset="2850">
-          <caret line="116" column="23" selection-start-line="116" selection-start-column="23" selection-end-line="116" selection-end-column="23" />
+        <state vertical-scroll-proportion="-33.37037" vertical-offset="1683" max-vertical-offset="2850">
+          <caret line="136" column="27" selection-start-line="136" selection-start-column="27" selection-end-line="136" selection-end-column="27" />
           <folding>
             <element signature="e#47#60#0" expanded="true" />
           </folding>
@@ -586,9 +582,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.703125" vertical-offset="1445" max-vertical-offset="2052">
-          <caret line="95" column="20" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="20" />
+        <state vertical-scroll-proportion="-7.9454546" vertical-offset="0" max-vertical-offset="2052">
+          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public_functions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68333334" vertical-offset="3716" max-vertical-offset="4712">
+          <caret line="215" column="58" selection-start-line="215" selection-start-column="58" selection-end-line="215" selection-end-column="58" />
+          <folding>
+            <element signature="e#24#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
