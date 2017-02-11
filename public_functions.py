@@ -148,9 +148,9 @@ def getPossibleSchedules(listOfCourseNameMust,listOfCourseNameOptional,semester,
 
     return schedules
 
-def sortSchedulesByCompactness(listOfCourseNameMust,listOfCourseNameOptional,semester,numberOfOptionals):
-    g = sorted(getPossibleSchedules(listOfCourseNameMust,listOfCourseNameOptional,semester,numberOfOptionals),key = lambda schedule : compactIndex(schedule,jsonData[semester]))
-    return g
+def sortSchedulesByCompactness(g,semester):
+    return sorted(g,key = lambda schedule : compactIndex(schedule,jsonData[semester]))
+
 
 def filterSchedules(g,semester,args):
     results = []
