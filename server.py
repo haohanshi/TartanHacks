@@ -1,7 +1,6 @@
 '''
     Simple socket server using threads
 '''
- 
 import socket
 from public_functions import *
 import sys
@@ -94,9 +93,10 @@ def clientthread(conn):
         conn.send(response_headers_raw.encode(encoding="utf-8"))
 
         conn.send('\n'.encode(encoding="utf-8")) # to separate headers from body
-        if path == "/15-112":
-            conn.send(str(jsonData["S"]["courses"]["15-112"]))
-        else:
+        if path[1:6] == "info:":
+            conn.send(str(jsonData["S"]["courses"][path[6:]]))
+        elif path[1:10] == "schedule:":
+            j = json.load(path[10:])
             conn.send("15122.....".encode(encoding="utf-8"))
         break
         # conn.close()
