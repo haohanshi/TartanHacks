@@ -39,7 +39,7 @@ class HTTPRequest(BaseHTTPRequestHandler):
 # This is the server part
  
 HOST = ''   # Symbolic name meaning all available interfaces
-PORT = 8000 # Arbitrary non-privileged port
+PORT = 8888 # Arbitrary non-privileged port
  
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print ('Socket created')
@@ -102,18 +102,22 @@ def clientthread(conn):
             courseMust = j["coursesMust"]
             courseOptional = j["coursesOptional"]
             semester = j["semester"]
-            numberOfOptionals = eval(j["numberOfOptionals"])
+            numberOfOptionals = j["numberOfOptionals"]
             sortingType = j["sort"]
             filter = j["filter"]
+            filter["lunchtime"].append(1)
             top = eval(j["top"])
-            print("yoyoyowearecool")
-            print(courseOptional)
-            print(numberOfOptionals)
+
 
             g = getPossibleSchedules(courseMust,courseOptional,semester,numberOfOptionals)
             if sortingType == "compact":
                 g = sortSchedulesByCompactness(g,semester)
-            result = filterSchedules(g,semester,filter)
+
+            afterFilter = filterSchedules(g,semester,filter)
+            result = []
+            for i in range(top):
+                cur = afterFilter[i]
+                result.append(produceFullInfoForSchedule(cur,semester))
             conn.send(json.dumps(result).encode(encoding = "utf-8"))
         break
 

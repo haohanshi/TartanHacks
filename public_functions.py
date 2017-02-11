@@ -71,9 +71,6 @@ def getPossibleSchedules(listOfCourseNameMust,listOfCourseNameOptional,semester,
         indexesForOptionals.append(i)
 
 
-    print("yoyoyoyowearecool")
-    print(indexesForOptionals)
-    print(numberOfOptionals)
     allCombinations = comb(indexesForOptionals,numberOfOptionals)
     scheduels = []
     for thisComb in allCombinations:
@@ -171,7 +168,6 @@ def filterSchedules(g,semester,args):
         needToCheckLunch = True
         lunchtime = args["lunchtime"]
     for k in g:
-
         if not getUpTooEarly(k,jsonData[semester],getuptime,getbacktime):
             if needToCheckLunch:
                 if lunchTime(k,jsonData[semester],lunchtime[0],lunchtime[1],lunchtime[2]):
@@ -180,4 +176,48 @@ def filterSchedules(g,semester,args):
                 results.append(k)
     return results
 
-comb([0],1)
+def produceFullInfoForSchedule(schedule,semester):
+    results = {}
+    for c in schedule:
+        lectureName = schedule[c][0]
+        sectionName = schedule[c][1]
+        result = {}
+        result["courseName"] = jsonData[semester]["courses"][c]["name"]
+        lectureDict = {}
+        lectureDict["lectureName"] = lectureName
+        for l in jsonData[semester]["courses"][c]["lectures"]:
+            if l["name"]== lectureName:
+                theLecture = l
+                break
+        lectureTimes = []
+        lectureDays = []
+        for t in theLecture["times"]:
+            lectureDays += (t["days"])
+            for j in range(len(t["days"])):
+                lectureTimes.append([parseTimeTo24(t["begin"]),parseTimeTo24(t["end"])])
+        lectureDict["lectureTime"] = lectureTimes
+        lectureDict["lectureDays"] = lectureDays
+
+
+        sectionDict = {}
+        sectionDict["sectionName"] = sectionName
+        for l in jsonData[semester]["courses"][c]["sections"]:
+            if l["name"]== sectionName:
+                theSection = l
+                break
+        sectionTimes = []
+        sectionDays = []
+        for t in theSection["times"]:
+            sectionDays += (t["days"])
+            for j in range(len(t["days"])):
+                sectionTimes.append([parseTimeTo24(t["begin"]),parseTimeTo24(t["end"])])
+        sectionDict["sectionTime"] = sectionTimes
+        sectionDict["sectionDays"] = sectionDays
+        result["lecture"]= lectureDict
+        result["section"]= sectionDict
+        results[c] = result
+    return results
+
+
+
+

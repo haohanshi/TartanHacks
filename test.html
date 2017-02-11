@@ -69,7 +69,7 @@ function loadXMLDoc2() {
 function Submit() {
     var jobValue = document.getElementsByName('txtJob')[0].value;
     var xhttp = new XMLHttpRequest();
-    var json = {"coursesMust":["15-122","15-112","15-213"],"coursesOptional":["73-100"],"sort":"compact","filter":{"getuptime":"9","getbacktime":"19","lunchtime":["11","13"]},"top":"10","semester":"S","numberOfOptionals":"1"};
+    var json = {"coursesMust":["15-122"],"coursesOptional":["73-100"],"sort":"compact","filter":{"getuptime":9,"getbacktime":19,"lunchtime":[11,13]},"top":"10","semester":"S","numberOfOptionals":1};
     jsonstring = JSON.stringify(json);
     console.log(jsonstring)
     xhttp.onreadystatechange = function() {
@@ -90,8 +90,8 @@ function Submit() {
       //   "Name: " + obj.name + "<br />" + "Units: " + obj.units + "<br />" + "Pre-req: " + prer + "<br />" + "Co-req: " + cor + "<br />"+ "Description: "+ obj.desc + "<br />";
       }
     };
-  // url = parse('http://128.237.201.122:8000/schedule:{"coursesMust:[15-122,15-112,15-213],coursesOptional:[73-100],sort:compact,filter:{getuptime:9,getbacktime:19,lunchtime:[11,13]},top:10",semester:"S",numberOfOptionals:3}', jobValue);
-  url = parse("http://128.237.180.140:8000/schedule:%s", jsonstring);
+  //url = parse('http://128.237.201.122:8000/schedule:{"coursesMust:[15-122,15-112,15-213],coursesOptional:[73-100],sort:compact,filter:{getuptime:9,getbacktime:19,lunchtime:[11,13]},top:10",semester:"S",numberOfOptionals:3}', jobValue);
+  url = parse("http://128.237.180.140:8888/schedule:%s", jsonstring);
   console.log(url);
   xhttp.open("GET", url , true);
   xhttp.send();
