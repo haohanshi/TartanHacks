@@ -87,7 +87,7 @@ function Submit() {
         "Name: " + obj.name + "<br />" + "Units: " + obj.units + "<br />" + "Pre-req: " + prer + "<br />" + "Co-req: " + cor + "<br />"+ "Description: "+ obj.desc + "<br />";
       }
     };
-  url = parse('http://128.237.201.122:8000/%s', jobValue);
+  url = parse('http://128.237.201.122:8000/info:%s', jobValue);
   xhttp.open("GET", url, true);
   xhttp.send();
 }

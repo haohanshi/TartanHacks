@@ -94,7 +94,7 @@ def clientthread(conn):
 
         conn.send('\n'.encode(encoding="utf-8")) # to separate headers from body
         if path[1:6] == "info:":
-            conn.send(str(jsonData["S"]["courses"][path[6:]]))
+            conn.send(str(json.dumps(jsonData["S"]["courses"][path[6:]])))
         elif path[1:10] == "schedule:":
             j = json.load(path[10:])
             conn.send("15122.....".encode(encoding="utf-8"))
