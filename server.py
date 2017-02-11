@@ -5,12 +5,25 @@
 import socket
 import sys
 from thread import *
+from urlparse import urlparse
+from BaseHTTPServer import BaseHTTPRequestHandler
+from StringIO import StringIO
+
 try:
     from http_parser.parser import HttpParser
 except ImportError:
     from http_parser.pyparser import HttpParser
-import urlparse
 
+class HTTPRequest(BaseHTTPRequestHandler):
+    def __init__(self, request_text):
+        self.rfile = StringIO(request_text)
+        self.raw_requestline = self.rfile.readline()
+        self.error_code = self.error_message = None
+        self.parse_request()
+
+    def send_error(self, code, message):
+        self.error_code = code
+        self.error_message = message
 
 # This is the server part
  
@@ -50,10 +63,11 @@ def clientthread(conn):
         data = conn.recv(1024)
         if not data: 
             break
+        request = HTTPRequest(data)
+        path = request.path
 
         response_headers = {
             'Content-Type': 'text',
-            'Content-Length': 0,
             'Connection': 'close',
         }
 
@@ -67,7 +81,12 @@ def clientthread(conn):
         r = '%s %s %s\n' % (response_proto, response_status, response_status_text)
         conn.send(r.encode(encoding="utf-8"))
         conn.send(response_headers_raw.encode(encoding="utf-8"))
+
         conn.send('\n'.encode(encoding="utf-8")) # to separate headers from body
+        if path == "/112":
+            conn.send("15112.....".encode(encoding="utf-8"))
+        else:
+            conn.send("15122.....".encode(encoding="utf-8"))
         break
         # conn.close()
      
@@ -84,8 +103,6 @@ while 1:
      
     #start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the function.
     start_new_thread(clientthread ,(conn,))
-
- 
 s.close()
 
     
