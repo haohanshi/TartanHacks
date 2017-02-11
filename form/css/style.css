@@ -18,7 +18,7 @@ body {
   font-size: 12px;
   line-height: 30px;
   color: #777;
-  background: #00FFFF;
+  background: #597F91;
 }
 
 .container {
@@ -38,7 +38,7 @@ body {
 }
 
 #contact {
-  background: #FFFF00;
+  background: #F4AF6B;
   padding: 25px;
   margin: 150px 0;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);

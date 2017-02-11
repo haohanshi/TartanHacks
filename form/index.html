@@ -15,15 +15,15 @@
   <form id="contact" action="" method="post">
     <h1>Generate Your Course Schedule</h1>
     <fieldset id="1">
-      <input placeholder="Courses you must take (eg. 15-122 15-112)" id="a" type="text" tabindex="1" required autofocus>
-    </fieldset>
-    <fieldset id="2">
-      <input placeholder="The number of optional courses" id="b" type="text" tabindex="2" required>
+      <input placeholder="Courses you must take, seperated by space (eg. 15-122 15-112)" id="a" type="text" tabindex="1" required autofocus>
     </fieldset>
     <fieldset id="3">
-      <input placeholder="Optional course you may take" id="c" type="text" tabindex="3" required>
+      <input placeholder="Optional course you may take, seperated by space" id="b" type="text" tabindex="3" required>
     </fieldset>
-	<p> The time you get up in the morning </p>
+    <fieldset id="2">
+      <input placeholder="The number of optional courses you want in your schedule" id="c" type="text" tabindex="2" required>
+    </fieldset>
+	<p> The time you want your class to begin</p>
 	<select id="d">
 				<option value = 6>6:00</option>
 		        <option value = 7>7:00</option>
@@ -31,7 +31,7 @@
 				<option value = 9>9:00</option>
                 <option value = 10>10:00</option>
 	</select>
-	<p> The time your class ends </p>
+	<p> The time you want your class to end </p>
 	<select id="e">
 				<option value = 14>2:00</option>
 		        <option value = 15>3:00</option>
@@ -63,14 +63,14 @@
     </fieldset>
 	<script>
 	function myFunction() {
-    var mustcourses = document.getElementById("a").value;
-	var numOptCourses = document.getElementById("b").value;
-    var optCourses = document.getElementById("c").value;
+    var mustCourses = document.getElementById("a").value;
+	var numOptCourses = document.getElementById("c").value;
+    var optCourses = document.getElementById("b").value;
     var timeUp = document.getElementById("d").value;
     var timeEnd = document.getElementById("e").value;
     var timeLunchStart = document.getElementById("f").value;
     var timeLunchEnds = document.getElementById("g").value;
-	console.log("The fieldset elements: ", mustcourses, numOptCourses, optCourses, timeUp, timeEnd, timeLunchStart, timeLunchEnds);
+	console.log("The fieldset elements: ", mustCourses, optCourses, numOptCourses, timeUp, timeEnd, timeLunchStart, timeLunchEnds);
 	console.log("ka");
 	return false;
 	}	
