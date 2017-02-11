@@ -13,10 +13,17 @@ with open("data/"+"M1"+'.json') as data_file:
     jsonData["M1"] = json.load(data_file)
 with open("data/"+"M2"+'.json') as data_file:
     jsonData["M2"] = json.load(data_file)
-with open('data/fce.csv') as csvfile:
-    spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-    for row in spamreader:
-        print(row)
+
+fceData = []
+for i in range(0,8):
+    with open("data/"+ str(i) +".csv") as csvfile:
+        spamreader = csv.reader(csvfile)
+        for row in spamreader:
+            print(row)
+            fceData.append(row)
+
+print(len(fceData))
+
 
 
 j = 0
@@ -225,5 +232,13 @@ def produceFullInfoForSchedule(schedule,semester):
     return results
 
 
+def fceReturn(courseWithGang):
+    withnogang = courseWithGang[:2] + courseWithGang[3:]
+    for i in fceData:
+        if i[4] == withnogang:
+            thisCourseRow = i
+            break
+    return {"hpw":i[9],"ot":i[17],"oc":i[18]}
 
 
+print(fceReturn("15-122"))

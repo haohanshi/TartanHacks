@@ -106,7 +106,7 @@ def clientthread(conn):
             sortingType = j["sort"]
             filter = j["filter"]
             filter["lunchtime"].append(1)
-            top = eval(j["top"])
+            top = j["top"]
 
 
             g = getPossibleSchedules(courseMust,courseOptional,semester,numberOfOptionals)
@@ -119,6 +119,8 @@ def clientthread(conn):
                 cur = afterFilter[i]
                 result.append(produceFullInfoForSchedule(cur,semester))
             conn.send(json.dumps(result).encode(encoding = "utf-8"))
+        elif path[1:5] == "fce:":
+            conn.send(json.dumps(fceReturn(path[5:])).encode(encoding = "utf-8"))
         break
 
 
