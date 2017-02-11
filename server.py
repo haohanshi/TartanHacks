@@ -3,7 +3,7 @@
 '''
  
 import socket
-import test
+from public_functions import *
 import sys
 import json
 from thread import *
