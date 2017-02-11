@@ -69,26 +69,31 @@ function loadXMLDoc2() {
 function Submit() {
     var jobValue = document.getElementsByName('txtJob')[0].value;
     var xhttp = new XMLHttpRequest();
+    var json = {"coursesMust":["15-122","15-112","15-213"],"coursesOptional":["73-100"],"sort":"compact","filter":{"getuptime":"9","getbacktime":"19","lunchtime":["11","13"]},"top":"10","semester":"S","numberOfOptionals":"1"};
+    jsonstring = JSON.stringify(json);
+    console.log(jsonstring)
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         obj = JSON.parse(this.responseText);
         document.getElementById("test").innerHTML = this.responseText;
-        if (obj.prereqs == null){
-          prer = "None";
-        } else {
-          prer = obj.prereqs;
-        }
-        if (obj.coreqs == null){
-          cor = "None";
-        } else {
-          cor = obj.coreqs;
-        }
-        document.getElementById("submittext").innerHTML =
-        "Name: " + obj.name + "<br />" + "Units: " + obj.units + "<br />" + "Pre-req: " + prer + "<br />" + "Co-req: " + cor + "<br />"+ "Description: "+ obj.desc + "<br />";
+      //   if (obj.prereqs == null){
+      //     prer = "None";
+      //   } else {
+      //     prer = obj.prereqs;
+      //   }
+      //   if (obj.coreqs == null){
+      //     cor = "None";
+      //   } else {
+      //     cor = obj.coreqs;
+      //   }
+      //   document.getElementById("submittext").innerHTML =
+      //   "Name: " + obj.name + "<br />" + "Units: " + obj.units + "<br />" + "Pre-req: " + prer + "<br />" + "Co-req: " + cor + "<br />"+ "Description: "+ obj.desc + "<br />";
       }
     };
-  url = parse('http://128.237.201.122:8000/info:%s', jobValue);
-  xhttp.open("GET", url, true);
+  // url = parse('http://128.237.201.122:8000/schedule:{"coursesMust:[15-122,15-112,15-213],coursesOptional:[73-100],sort:compact,filter:{getuptime:9,getbacktime:19,lunchtime:[11,13]},top:10",semester:"S",numberOfOptionals:3}', jobValue);
+  url = parse("http://128.237.201.122:8000/schedule:%s", jsonstring);
+  console.log(url);
+  xhttp.open("GET", url , true);
   xhttp.send();
 }
 </script>

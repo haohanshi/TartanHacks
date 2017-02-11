@@ -9,6 +9,7 @@ from thread import *
 from urlparse import urlparse
 from BaseHTTPServer import BaseHTTPRequestHandler
 from StringIO import StringIO
+import urllib
 
 jsonData = {}
 
@@ -96,7 +97,10 @@ def clientthread(conn):
         if path[1:6] == "info:":
             conn.send(str(json.dumps(jsonData["S"]["courses"][path[6:]])))
         elif path[1:10] == "schedule:":
-            j = json.load(path[10:])
+            print path[10:]
+            unquoted = urllib.unquote(path[10:])
+            print unquoted
+            j = json.loads(unquoted)
             courseMust = j["coursesMust"]
             courseOptional = j["coursesOptional"]
             semester = j["semester"]
