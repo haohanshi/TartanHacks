@@ -32,17 +32,15 @@ def parseTimeSlots(tt):
         begin = 0.0
         end = 0.0
         if t["begin"][:2] == "12" and t["begin"][-2:] == "PM":
-            if t["begin"][-4:-2] == "20":
+            if t["begin"][-4:-2] == "30":
                 begin = 12.5
             else:
-                begin = 13.0
+                begin = 12.0
         else:
-            if t["begin"][-4:-2] == "20" or t["begin"][-4:-2] == "30":
+            if t["begin"][-4:-2] == "30":
                 begin = evval(t["begin"][:t["begin"].index(":")]) + 0.5
-            elif t["begin"][-4:-2] == "00":
-                begin = evval(t["begin"][:t["begin"].index(":")])
             else:
-                begin = evval(t["begin"][:t["begin"].index(":")]) + 1
+                begin = evval(t["begin"][:t["begin"].index(":")])
             if t["begin"][-2:] == "PM":
                 begin += 12.0
 
@@ -52,10 +50,8 @@ def parseTimeSlots(tt):
             else:
                 end = 13.0
         else:
-            if t["end"][-4:-2] == "20" or t["begin"][-4:-2] == "30":
+            if t["end"][-4:-2] == "20":
                 end = evval(t["end"][:t["end"].index(":")]) + 0.5
-            elif t["begin"][-4:-2] == "00":
-                begin = evval(t["begin"][:t["begin"].index(":")])
             else:
                 end = evval(t["end"][:t["end"].index(":")]) + 1
             if t["end"][-2:] == "PM":
@@ -131,5 +127,66 @@ def extractIDInfo(coursesInfo,currentIndexes,ifLectures,coursesNames):
 def match(overlapFormat, order):
     for i in range(len(overlapFormat)):
         if not overlapFormat[i] == order[i] and not overlapFormat[i] == -1:
+            return False
+    return True
+
+def timeSlotsOf(schedule,data):
+    timesSlots = []
+    for cName in schedule:
+        courseInfo = data["courses"][cName]
+        foundLecture = {}
+        foundSection = {}
+        if schedule[cName][0] != "":
+            for lecture in data["courses"][cName]["lectures"]:
+                if lecture["name"] == schedule[cName][0]:
+                    foundLecture = lecture
+                    break
+            timesSlots += parseTimeSlots(foundLecture["times"])
+        if schedule[cName][1] != "":
+            for section in data["courses"][cName]["sections"]:
+                if section["name"] == schedule[cName][1]:
+                    foundSection = section
+                    break
+            timesSlots += parseTimeSlots(foundSection["times"])
+    return timesSlots
+
+
+def compactIndex(schedule,data):
+    timeSlots = timeSlotsOf(schedule,data)
+    timeCompact = {}
+    for t in timeSlots:
+        weekday = int(t[0]/100)
+        if weekday in timeCompact:
+            timeCompact[weekday][0] = min(timeCompact[weekday][0],t[0])
+            timeCompact[weekday][1] = max(timeCompact[weekday][1],t[1])
+        else:
+            timeCompact[weekday] = [t[0],t[1]]
+    summ = 0.0
+    for weekday in timeCompact:
+        summ += timeCompact[weekday][1] - timeCompact[weekday][0]
+    return summ
+
+
+def getUpTooEarly(schedule,data,getuptime,getbacktime):
+    timeSlots = timeSlotsOf(schedule,data)
+    for t in timeSlots:
+        if t[0] % 100.0 < getuptime or t[1] % 100 > getbacktime:
+            return True
+    return False
+
+
+def lunchTime(schedule,data,lunchTimeBegin,lunchTimeEnd,lunchNeed):
+    lunchTimeDur = lunchTimeEnd - lunchTimeBegin
+    ltRemain = {1:lunchTimeDur,2:lunchTimeDur,3:lunchTimeDur,4:lunchTimeDur,5:lunchTimeDur}
+    timeSlots = timeSlotsOf(schedule,data)
+    for t in timeSlots:
+        ind = int(t[0]/100)
+        if t[0]%100 > lunchTimeBegin and t[1]%100 < lunchTimeEnd:
+            ltRemain[ind] -= (t[1] - t[0])
+        if t[0]%100 > lunchTimeBegin and t[1]%100 > lunchTimeEnd and t[0]%100 < lunchTimeEnd:
+            ltRemain[ind] -= (lunchTimeEnd - t[0]%100)
+        if t[0]%100 < lunchTimeBegin and t[1]%100 < lunchTimeEnd and t[1]%100 > lunchTimeBegin:
+            ltRemain[ind] -= (t[1]%100 - lunchTimeBegin)
+        if ltRemain[ind] < lunchNeed:
             return False
     return True
