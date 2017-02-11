@@ -213,6 +213,8 @@ def produceFullInfoForSchedule(schedule,semester):
         sectionDict["sectionName"] = "Sec "+sectionName
         if lectureDict["lectureName"] == "Lec " or lectureDict["lectureName"] == "Lec":
             lectureDict["lectureName"] = "Lec 1"
+        if sectionDict["sectionName"] == "Sec " or sectionDict["sectionName"] == "Sec":
+            sectionDict["sectionName"] = "Sec 1"
         for l in jsonData[semester]["courses"][c]["sections"]:
             if l["name"]== sectionName:
                 theSection = l
