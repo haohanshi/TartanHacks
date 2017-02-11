@@ -14,9 +14,32 @@
 	</script>
 	<!-- Resource jQuery -->
 	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Lecture',     23],
+          ['Homework',  45],
+          ['Remaining', 44],
+          ['Sleep',    56]
+        ]);
+
+        var options = {
+          title: 'My Daily Activities',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
 	<title>Schedule</title>
 </head>
 <body>
+
 <div class="cd-schedule loading">
 	<div class="timeline">
 		<ul id = "time">
@@ -138,9 +161,13 @@
 
 	<div class="cover-layer"></div>
 </div> <!-- .cd-schedule -->
+<div id="piechart_3d" style=" height: 500px;"></div>
+<div id="barchart_values" style=“ width:1000px; height: 300px;"></div>
 </script>
 <script language="javascript">
 	var courseCount = 1;
+	var OCG = 0;
+	var OTG = 0;
 	// var string = '{"15-112":{"courseName":"Program wfeffefefefe","lecture":{"lectureName":"Lec 1", "lectureDays":[1,3,5],"lectureTime":[["9:00","11:00"],["9:00","11:00"],["9:00","11:00"]]},"section":{"sectionName":"Sec A","sectionDays":[2,4],"sectionTime":[["13:00","14:00"],["13:00","14:00"]]}}}';
 	function parse(str) {
 	    var args = [].slice.call(arguments, 1),
@@ -222,10 +249,32 @@
     	xhttp.open("GET", url , true);
   		xhttp.send();
 	}
+	function fce(coursenum) {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+      		if (this.readyState == 4 && this.status == 200) {
+	        json = JSON.parse(this.responseText);
+	        console.log(json);
+	        oc = parseFloat(json.oc);
+	        ot = parseFloat(json.ot);
+	        OCG = OCG + oc;
+	        console.log(OCG);
+	        OTG = OTG + ot;
+	        console.log(OTG);
+	        drawChart();
+	        // processSchedule(courselist[0]);
+      		}
+    	};
+		url = parse("http://128.237.201.122:8888/fce:%s", coursenum);
+		xhttp.open("GET", url , true);
+  		xhttp.send();
+	}
 	function processSchedule(course) {	
 		for (var key in course){
 		        var courseCode = key;
+
 		        console.log(courseCode);
+		        fce(courseCode);
 		        var courseObj = course[key];
 		        courseName = courseObj.courseName;
 		        console.log(courseName);
@@ -319,6 +368,36 @@
 		var elements = document.getElementsByName('ass')
 		while (elements[0]) elements[0].parentNode.removeChild(elements[0])
 	}
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      console.log("print");
+      console.log(OCG);
+      console.log(OTG);
+
+      var data = google.visualization.arrayToDataTable([
+        ["Element", "Density", { role: "style" } ],
+        ["Average course rating", OCG/courseCount, "#b87333"],
+        ["Avaerage professor rating", OTG/courseCount, "silver"],
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Rating for professors",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+      chart.draw(view, options);}
 	// test();
 </script>
 

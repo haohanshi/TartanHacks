@@ -115,7 +115,8 @@ def clientthread(conn):
 
             afterFilter = filterSchedules(g,semester,filter)
             result = []
-            for i in range(top):
+            for i in range(1):
+
                 cur = afterFilter[i]
                 result.append(produceFullInfoForSchedule(cur,semester))
             conn.send(json.dumps(result).encode(encoding = "utf-8"))
