@@ -190,3 +190,13 @@ def lunchTime(schedule,data,lunchTimeBegin,lunchTimeEnd,lunchNeed):
         if ltRemain[ind] < lunchNeed:
             return False
     return True
+
+def parseTimeTo24(t):
+    if t[-2:] == "AM":
+        return t[:-2]
+    if t[-2:] == "PM":
+        if t[:2] == "12":
+            return t[:-2]
+        else:
+            return str(12+evval(t[:2]))+t[2:-2]
+

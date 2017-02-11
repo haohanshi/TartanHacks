@@ -1,5 +1,6 @@
 __author__ = 'liukaige'
 import json
+import csv
 from private_functions import *
 
 jsonData = {}
@@ -12,6 +13,15 @@ with open("data/"+"M1"+'.json') as data_file:
     jsonData["M1"] = json.load(data_file)
 with open("data/"+"M2"+'.json') as data_file:
     jsonData["M2"] = json.load(data_file)
+
+fceData = []
+for i in range(0,8):
+    with open("data/"+ str(i) +".csv") as csvfile:
+        spamreader = csv.reader(csvfile)
+        for row in spamreader:
+            fceData.append(row)
+
+
 
 j = 0
 for semester in ["S","F","M1","M2"]:
@@ -69,6 +79,7 @@ def getPossibleSchedules(listOfCourseNameMust,listOfCourseNameOptional,semester,
     indexesForOptionals = []
     for i in range(len(listOfCourseNameOptional)):
         indexesForOptionals.append(i)
+
 
     allCombinations = comb(indexesForOptionals,numberOfOptionals)
     scheduels = []
@@ -148,9 +159,9 @@ def getPossibleSchedules(listOfCourseNameMust,listOfCourseNameOptional,semester,
 
     return schedules
 
-def sortSchedulesByCompactness(listOfCourseNameMust,listOfCourseNameOptional,semester,numberOfOptionals):
-    g = sorted(getPossibleSchedules(listOfCourseNameMust,listOfCourseNameOptional,semester,numberOfOptionals),key = lambda schedule : compactIndex(schedule,jsonData[semester]))
-    return g
+def sortSchedulesByCompactness(g,semester):
+    return sorted(g,key = lambda schedule : compactIndex(schedule,jsonData[semester]))
+
 
 def filterSchedules(g,semester,args):
     results = []
@@ -167,7 +178,6 @@ def filterSchedules(g,semester,args):
         needToCheckLunch = True
         lunchtime = args["lunchtime"]
     for k in g:
-
         if not getUpTooEarly(k,jsonData[semester],getuptime,getbacktime):
             if needToCheckLunch:
                 if lunchTime(k,jsonData[semester],lunchtime[0],lunchtime[1],lunchtime[2]):
@@ -176,3 +186,53 @@ def filterSchedules(g,semester,args):
                 results.append(k)
     return results
 
+def produceFullInfoForSchedule(schedule,semester):
+    results = {}
+    for c in schedule:
+        lectureName = schedule[c][0]
+        sectionName = schedule[c][1]
+        result = {}
+        result["courseName"] = jsonData[semester]["courses"][c]["name"]
+        lectureDict = {}
+        lectureDict["lectureName"] = lectureName
+        for l in jsonData[semester]["courses"][c]["lectures"]:
+            if l["name"]== lectureName:
+                theLecture = l
+                break
+        lectureTimes = []
+        lectureDays = []
+        for t in theLecture["times"]:
+            lectureDays += (t["days"])
+            for j in range(len(t["days"])):
+                lectureTimes.append([parseTimeTo24(t["begin"]),parseTimeTo24(t["end"])])
+        lectureDict["lectureTime"] = lectureTimes
+        lectureDict["lectureDays"] = lectureDays
+
+
+        sectionDict = {}
+        sectionDict["sectionName"] = "Sec "+sectionName
+        for l in jsonData[semester]["courses"][c]["sections"]:
+            if l["name"]== sectionName:
+                theSection = l
+                break
+        sectionTimes = []
+        sectionDays = []
+        for t in theSection["times"]:
+            sectionDays += (t["days"])
+            for j in range(len(t["days"])):
+                sectionTimes.append([parseTimeTo24(t["begin"]),parseTimeTo24(t["end"])])
+        sectionDict["sectionTime"] = sectionTimes
+        sectionDict["sectionDays"] = sectionDays
+        result["lecture"]= lectureDict
+        result["section"]= sectionDict
+        results[c] = result
+    return results
+
+
+def fceReturn(courseWithGang):
+    withnogang = courseWithGang[:2] + courseWithGang[3:]
+    for i in fceData:
+        if i[4] == withnogang:
+            thisCourseRow = i
+            break
+    return {"hpw":i[9],"ot":i[17],"oc":i[18]}

@@ -9,6 +9,7 @@ from thread import *
 from urlparse import urlparse
 from BaseHTTPServer import BaseHTTPRequestHandler
 from StringIO import StringIO
+import urllib
 
 jsonData = {}
 
@@ -96,9 +97,33 @@ def clientthread(conn):
         if path[1:6] == "info:":
             conn.send(str(json.dumps(jsonData["S"]["courses"][path[6:]])))
         elif path[1:10] == "schedule:":
-            j = json.load(path[10:])
-            conn.send("15122.....".encode(encoding="utf-8"))
+            unquoted = urllib.unquote(path[10:])
+            j = json.loads(unquoted)
+            courseMust = j["coursesMust"]
+            courseOptional = j["coursesOptional"]
+            semester = j["semester"]
+            numberOfOptionals = j["numberOfOptionals"]
+            sortingType = j["sort"]
+            filter = j["filter"]
+            filter["lunchtime"].append(1)
+            top = j["top"]
+
+
+            g = getPossibleSchedules(courseMust,courseOptional,semester,numberOfOptionals)
+            if sortingType == "compact":
+                g = sortSchedulesByCompactness(g,semester)
+
+            afterFilter = filterSchedules(g,semester,filter)
+            result = []
+            for i in range(top):
+                cur = afterFilter[i]
+                result.append(produceFullInfoForSchedule(cur,semester))
+            conn.send(json.dumps(result).encode(encoding = "utf-8"))
+        elif path[1:5] == "fce:":
+            conn.send(json.dumps(fceReturn(path[5:])).encode(encoding = "utf-8"))
         break
+
+
         # conn.close()
      
         # conn.sendall(reply)
