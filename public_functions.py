@@ -19,10 +19,7 @@ for i in range(0,8):
     with open("data/"+ str(i) +".csv") as csvfile:
         spamreader = csv.reader(csvfile)
         for row in spamreader:
-            print(row)
             fceData.append(row)
-
-print(len(fceData))
 
 
 
@@ -239,6 +236,3 @@ def fceReturn(courseWithGang):
             thisCourseRow = i
             break
     return {"hpw":i[9],"ot":i[17],"oc":i[18]}
-
-
-print(fceReturn("15-122"))
