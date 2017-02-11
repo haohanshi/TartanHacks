@@ -97,17 +97,19 @@ def clientthread(conn):
         if path[1:6] == "info:":
             conn.send(str(json.dumps(jsonData["S"]["courses"][path[6:]])))
         elif path[1:10] == "schedule:":
-            print path[10:]
             unquoted = urllib.unquote(path[10:])
-            print unquoted
             j = json.loads(unquoted)
             courseMust = j["coursesMust"]
             courseOptional = j["coursesOptional"]
             semester = j["semester"]
-            numberOfOptionals = j["numberOfOptionals"]
+            numberOfOptionals = eval(j["numberOfOptionals"])
             sortingType = j["sort"]
             filter = j["filter"]
-            top = j["top"]
+            top = eval(j["top"])
+            print("yoyoyowearecool")
+            print(courseOptional)
+            print(numberOfOptionals)
+
             g = getPossibleSchedules(courseMust,courseOptional,semester,numberOfOptionals)
             if sortingType == "compact":
                 g = sortSchedulesByCompactness(g,semester)

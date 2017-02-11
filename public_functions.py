@@ -70,6 +70,10 @@ def getPossibleSchedules(listOfCourseNameMust,listOfCourseNameOptional,semester,
     for i in range(len(listOfCourseNameOptional)):
         indexesForOptionals.append(i)
 
+
+    print("yoyoyoyowearecool")
+    print(indexesForOptionals)
+    print(numberOfOptionals)
     allCombinations = comb(indexesForOptionals,numberOfOptionals)
     scheduels = []
     for thisComb in allCombinations:
@@ -176,3 +180,4 @@ def filterSchedules(g,semester,args):
                 results.append(k)
     return results
 
+comb([0],1)

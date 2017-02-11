@@ -12,6 +12,9 @@ def evval(s):
         return eval(s)
 
 def comb(arr,k):
+    print("yoyoyo")
+    print(arr)
+    print(k)
     if len(arr) == k:
         return [arr]
     if k == 0:
