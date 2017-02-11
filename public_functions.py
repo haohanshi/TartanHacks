@@ -1,5 +1,6 @@
 __author__ = 'liukaige'
 import json
+import csv
 from private_functions import *
 
 jsonData = {}
@@ -12,6 +13,11 @@ with open("data/"+"M1"+'.json') as data_file:
     jsonData["M1"] = json.load(data_file)
 with open("data/"+"M2"+'.json') as data_file:
     jsonData["M2"] = json.load(data_file)
+with open('data/fce.csv') as csvfile:
+    spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+    for row in spamreader:
+        print(row)
+
 
 j = 0
 for semester in ["S","F","M1","M2"]:
@@ -200,7 +206,7 @@ def produceFullInfoForSchedule(schedule,semester):
 
 
         sectionDict = {}
-        sectionDict["sectionName"] = sectionName
+        sectionDict["sectionName"] = "Sec "+sectionName
         for l in jsonData[semester]["courses"][c]["sections"]:
             if l["name"]== sectionName:
                 theSection = l
