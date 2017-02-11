@@ -3,16 +3,27 @@
 '''
  
 import socket
+import test
 import sys
+import json
 from thread import *
 from urlparse import urlparse
 from BaseHTTPServer import BaseHTTPRequestHandler
 from StringIO import StringIO
 
-try:
-    from http_parser.parser import HttpParser
-except ImportError:
-    from http_parser.pyparser import HttpParser
+jsonData = {}
+
+with open("data/"+"S"+'.json') as data_file:
+    jsonData["S"] = json.load(data_file)
+with open("data/"+"F"+'.json') as data_file:
+    jsonData["F"] = json.load(data_file)
+with open("data/"+"M1"+'.json') as data_file:
+    jsonData["M1"] = json.load(data_file)
+with open("data/"+"M2"+'.json') as data_file:
+    jsonData["M2"] = json.load(data_file)
+with open("data/"+"S"+'.json') as data_file:
+    jsonData["S"] = json.load(data_file)
+
 
 class HTTPRequest(BaseHTTPRequestHandler):
     def __init__(self, request_text):
@@ -83,8 +94,8 @@ def clientthread(conn):
         conn.send(response_headers_raw.encode(encoding="utf-8"))
 
         conn.send('\n'.encode(encoding="utf-8")) # to separate headers from body
-        if path == "/112":
-            conn.send("15112.....".encode(encoding="utf-8"))
+        if path == "/15-112":
+            conn.send(str(jsonData["S"]["courses"]["15-112"]))
         else:
             conn.send("15122.....".encode(encoding="utf-8"))
         break
