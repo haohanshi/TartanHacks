@@ -245,7 +245,7 @@
 	        processSchedule(courselist[0]);
       		}
     	};
-    	url = parse("http://128.237.201.122:8888/schedule:%s", jsonstring);
+    	url = parse("http://128.237.201.122:8000/schedule:%s", jsonstring);
     	xhttp.open("GET", url , true);
   		xhttp.send();
 	}
@@ -265,7 +265,7 @@
 	        // processSchedule(courselist[0]);
       		}
     	};
-		url = parse("http://128.237.201.122:8888/fce:%s", coursenum);
+		url = parse("http://128.237.201.122:8000/fce:%s", coursenum);
 		xhttp.open("GET", url , true);
   		xhttp.send();
 	}
